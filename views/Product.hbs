@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+   <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Google fonts - Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700">
+    <!-- owl carousel-->
+    <link rel="stylesheet" href="/vendor/owl.carousel/assets/owl.carousel.css">
+    <link rel="stylesheet" href="/vendor/owl.carousel/assets/owl.theme.default.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="favicon.png">
+    <link rel="stylesheet" href="/css/main.css">
+
+  <meta property="og:url"           content={{productUrl.url}} />
+  <meta property="og:type"          content="website" />
+  <meta property="og:title"         content="Toy Renter" />
+  <meta property="og:description"   content={{#each toy}}{{this.toy_title}}{{/each}} />
+  <meta property="og:image"         content={{#each toy}}{{this.toy_image}}{{/each}} />
+
+</head>
+<body>
+
+  <!-- Start Header Code  -->
+  <div class="container-fluid">
+    <div class="row" style=" background-color: black;color: white;">
+      <div class="col-sm-2"><a href="/home"><img src="/images/HS.jpg" class="mx-auto d-block" style="height: 50px;"></a></div>
+      <div class="col-sm-7">
+            <div class="input-group" style="margin-top: 7px;">
+              <input type="text" class="form-control" placeholder="Search this blog">
+              <div class="input-group-append">
+                 <button class="btn btn-secondary" type="button">
+                    <i class="fa fa-search"></i>
+                 </button>
+              </div>
+            </div>   
+      </div>
+      <div class="col-sm-3">
+        {{#if user.name}}
+        <div style="float: left;margin-right: 20px;">
+            <div class="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle" style="background-color: black;border: 0;"data-toggle="dropdown">
+                <div>
+                  <a style="cursor: pointer;float:left"><img src="/images/login-icon.png" height="30px">Hello,
+                    <div style="margin-left: 15px;">
+                      {{user.name}}
+                    </div>
+                  </a>
+                </div>
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Your Account</a>
+                    <a class="dropdown-item" href="#">Your Order</a>
+                    <a class="dropdown-item" href="/logout">Log Out</a>
+                </div>
+            </div>
+          </div>
+          <div style="float: left;">
+                <a href="/home/cart" style="cursor: pointer;">
+                  <img src="/images/cart.png" height="30px" style="margin-top: 10px;float: left;">
+                      <p style="float: left;margin-top: 12px;color: white;">Cart</p>
+                </a>
+          </div>
+        {{else}}
+          <div style="float: left;margin-right: 20px;">
+            <a id="signIn_button" style="cursor: pointer;">
+              <img src="/images/login-icon.png" height="30px" style="margin-top: 10px;float: left;">
+                <p style="float: left;margin-top: 12px;">Sign In</p>
+            </a>
+          </div>
+            <div style="float: left;">
+              <a id="cart" style="cursor: pointer;">
+                <img src="/images/cart.png" height="30px" style="margin-top: 10px;float: left;">
+                    <p style="float: left;margin-top: 12px;color: white;">Cart</p>
+              </a>
+            </div>
+        {{/if}}
+        <div id="signInModal" class="modal">
+           <!-- Modal content -->
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <span class="close" style="align-items: right;"></span>
+                <div class="card card-signin my-5">
+                  <div class="card-body">
+                    <h5 class="card-title text-center" style="color: black;">Sign In</h5>
+                    <form class="form-signin">
+                      <div class="form-label-group">
+                        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                        <label for="inputEmail">Email address</label>
+                      </div>
+
+                      <div class="form-label-group">
+                        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                        <label for="inputPassword">Password</label>
+                      </div>
+
+                      <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+                      <hr class="my-4">
+                      <a id="google" class="btn btn-lg btn-google btn-block text-uppercase" type="submit" style="        cursor: pointer;"><i class="fab fa-google mr-2"></i> Sign in with Google</a>
+                      <a id="facebook" class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit" style="cursor: pointer;"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</a>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+</div>
+
+  <script type="text/javascript">
+    
+    var google = "/auth/google/product?id="+"{{#each toy}}{{this._id}}{{/each}}";
+
+    var facebook = "auth/facebook/product?id="+"{{#each toy}}{{this._id}}{{/each}}";
+
+    document.getElementById('google').href = google;
+
+    document.getElementById('facebook').href = facebook;
+  </script>
+        
+<script>
+// Get the modal
+var modal = document.getElementById('signInModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("signIn_button");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+var cart = document.getElementById('cart');
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+cart.onclick = function(){
+
+  modal.style.display = "block";
+}
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+  <div id="all" style="margin-top: 10px;">
+      <div id="content">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <!-- breadcrumb-->
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                  <li class="breadcrumb-item"><a id="Categories" href="">{{#each toy}}{{this.toy_categories}}{{/each}}</a> / </li>
+                  <script type="text/javascript">
+                           var url = "http://localhost:3000/home/"+"{{#each toy}}{{this.toy_categories}}{{/each}}";
+
+                            document.getElementById('Categories').href = url;
+                     </script>
+                  <li aria-current="page" class="breadcrumb-item active"> {{#each toy}}{{this.toy_name}}{{/each}}</li>
+                </ol>
+              </nav>
+            </div>
+            <div class="col-lg-3 order-2 order-lg-1">
+              <!--
+              *** MENUS AND FILTERS ***
+              _________________________________________________________
+              -->
+              <div class="card sidebar-menu mb-4">
+                <div class="card-header">
+                  <h3 class="h4 card-title">Categories<a href="#" class="btn btn-sm btn-danger pull-right"><i class="fa fa-times-circle"></i> Clear</a></h3>
+                </div>
+                <div class="card-body">
+                  <form action="" method="get">
+                    <div class="form-group">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="categories"> Animals 
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="categories"> Art and Craft 
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="categories"> Construction 
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="categories"> Dolls
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="categories"> Educational
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="categories"> Mechanical
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="categories"> Tedi bear
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="categories"> Vehical
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="categories"> Water Toy
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="categories"> Roborts 
+                        </label>
+                      </div>
+                    </div>
+                    <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>
+                  </form>
+                </div>
+              </div>
+              <div class="card sidebar-menu mb-4">
+                <div class="card-header">
+                  <h3 class="h4 card-title">Material<a href="#" class="btn btn-sm btn-danger pull-right"><i class="fa fa-times-circle"></i> Clear</a></h3>
+                </div>
+                <div class="card-body">
+                  <form>
+                    <div class="form-group">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> Plastic 
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> Wood   
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> Plush 
+                        </label>
+                      </div>
+                    </div>
+                    <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>
+                  </form>
+                </div>
+              </div>
+              <div class="card sidebar-menu mb-4">
+                <div class="card-header">
+                  <h3 class="h4 card-title">Colours <a href="#" class="btn btn-sm btn-danger pull-right"><i class="fa fa-times-circle"></i> Clear</a></h3>
+                </div>
+                <div class="card-body">
+                  <form>
+                    <div class="form-group">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"><span class="colour white"></span> White 
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"><span class="colour blue"></span> Blue 
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"><span class="colour green"></span>  Green
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"><span class="colour yellow"></span>  Yellow
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"><span class="colour red"></span>  Red 
+                        </label>
+                      </div>
+                    </div>
+                    <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>
+                  </form>
+                </div>
+              </div>
+
+              <div class="card sidebar-menu mb-4">
+                <div class="card-header">
+                  <h3 class="h4 card-title">Brands <a href="#" class="btn btn-sm btn-danger pull-right"><i class="fa fa-times-circle"></i> Clear</a></h3>
+                </div>
+                <div class="card-body">
+                  <form>
+                    <div class="form-group">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> 
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> 
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> 
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> 
+                        </label>
+                      </div>
+                    </div>
+                    <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>
+                  </form>
+                </div>
+              </div>
+              <!-- *** MENUS AND FILTERS END ***-->
+              <div class="banner"><a href="#"><img src="/img/banner.jpg" alt="sales 2014" class="img-fluid"></a></div>
+            </div>
+            <div class="col-lg-9 order-1 order-lg-2">
+              <div id="productMain" class="row">
+                <div class="col-md-6">
+                  <div data-slider-id="1" class="owl-carousel shop-detail-carousel">
+                    <div class="item"> <img src={{#each toy}}{{#with this.toy_image}}{{this.[0]}}{{/with}}{{/each}} alt="" class="img-fluid"></div>
+                    <div class="item"> <img src={{#each toy}}{{#with this.toy_image}}{{this.[1]}}{{/with}}{{/each}} alt="" class="img-fluid"></div>
+                    <div class="item"> <img src={{#each toy}}{{#with this.toy_image}}{{this.[2]}}{{/with}}{{/each}} alt="" class="img-fluid"></div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  {{#if user.name}}
+                  <div class="box">
+                    <h1 class="text-center">{{#each toy}}{{this.toy_name}}{{/each}}</h1>
+                    <p style="text-align: center;"> {{#each toy}}{{this.toy_title}}{{/each}}</p>
+                    <p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product details</a></p>
+                    <p class="price">{{#each toy}}{{this.toy_price}}{{/each}}</p>
+                    <p class="text-center buttons">
+                      <a id="addtocart" href="" class="btn btn-primary">
+                      <i class="fa fa-shopping-cart"></i> Add to cart
+                      </a>
+                      <a id="buynow" href="" class="btn btn-outline-primary"> Buy Now</a>
+                    </p>
+                  </div>
+                  <script type="text/javascript">
+                      var carturl = "http://localhost:3000/home/product/addtocart?id="+"{{#each toy}}{{this._id}}{{/each}}";
+
+                      document.getElementById('addtocart').href = carturl;
+
+                      var buynowurl = "http://localhost:3000/home/checkout1?id="+"{{#each toy}}{{this._id}}{{/each}}";
+
+                      document.getElementById('buynow').href = buynowurl;
+                  </script>
+                  {{else}}
+                  <div class="box">
+                    <h1 class="text-center">{{#each toy}}{{this.toy_name}}{{/each}}</h1>
+                    <p style="text-align: center;"> {{#each toy}}{{this.toy_title}}{{/each}}</p>
+                    <p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product details</a></p>
+                    <p class="price">{{#each toy}}{{this.toy_price}}{{/each}}</p>
+                    <p class="text-center buttons">
+                      <a id="addtocart"  class="btn btn-primary" style="cursor: pointer;">
+                      <i class="fa fa-shopping-cart"></i> Add to cart
+                      </a>
+                      <a id="buynow" class="btn btn-outline-primary" style="cursor: pointer;"> Buy Now</a>
+                    </p>
+                  </div>
+                  <script type="text/javascript">
+                      // Get the modal
+                      var modal = document.getElementById('signInModal');
+
+                      // Get the button that opens the modal
+                      var cart = document.getElementById('addtocart');
+
+                      var buynow = document.getElementById('buynow');
+
+                      // When the user clicks the button, open the modal 
+                      buynow.onclick = function() {
+                            modal.style.display = "block";
+                      }
+
+                      cart.onclick = function(){
+
+                            modal.style.display = "block";
+                      }
+
+                      // When the user clicks anywhere outside of the modal, close it
+                      window.onclick = function(event) {
+                            if (event.target == modal) {
+                                  modal.style.display = "none";
+                            } 
+                      }
+
+                  </script>
+                  {{/if}}
+                  <div data-slider-id="1" class="owl-thumbs">
+                    <button class="owl-thumb-item"><img src={{#each toy}}{{#with this.toy_image}}{{this.[0]}}{{/with}}{{/each}} alt="" class="img-fluid"></button>
+                    <button class="owl-thumb-item"><img src={{#each toy}}{{#with this.toy_image}}{{this.[1]}}{{/with}}{{/each}} alt="" class="img-fluid"></button>
+                    <button class="owl-thumb-item"><img src={{#each toy}}{{#with this.toy_image}}{{this.[2]}}{{/with}}{{/each}} alt="" class="img-fluid"></button>
+                  </div>
+                </div>
+              </div>
+              <div id="details" class="box">
+                <p></p>
+                <h4>Product details</h4>
+                <ul>
+                  {{#each toy}}
+                  {{#each this.toy_descripation}}
+                  <li>{{this}}</li>
+                  {{/each}}
+                  {{/each}}
+                </ul>
+                <table>
+                <tr><td><h4>Categorie</h4></td><td></td><td><p style="margin-top:10px;">{{#each toy}}{{this.toy_categories}}{{/each}}</p></td></tr>
+                <tr><td><h4>Age</h4></td><td></td><td><p style="margin-top:10px;">{{#each toy}}{{this.age_from}}-{{this.age_to}}{{/each}} year</p></td></tr>
+                </table>
+                <h4>Material</h4>
+                <ul>
+                  <li>{{#each toy}}{{this.toy_material}}{{/each}}</li>
+                </ul>
+                <h4>Color</h4>
+                <ul>
+                  <li>{{#each toy}}{{this.toy_color}}{{/each}}</li>
+                </ul>
+                <hr>
+                <div class="social">
+                  <h4>Show it to your friends</h4>
+                  <script>(function(d, s, id) {
+                      var js, fjs = d.getElementsByTagName(s)[0];
+                      if (d.getElementById(id)) return;
+                      js = d.createElement(s); js.id = id;
+                      js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+                      fjs.parentNode.insertBefore(js, fjs);
+                      }(document, 'script', 'facebook-jssdk'));</script>
+
+                      <!-- Your share button code -->
+                      <div class="fb-share-button" 
+                          data-href={{productUrl.url}}; 
+                          data-layout="button">
+                      </div>
+                </div>
+              </div>
+              <div class="row same-height-row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="box same-height">
+                    <h3>You may also like these products</h3>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="product same-height">
+                    <div class="flip-container">
+                      <div class="flipper">
+                        <div class="front"><a href="detail.html"><img src="/img/product2.jpg" alt="" class="img-fluid"></a></div>
+                        <div class="back"><a href="detail.html"><img src="/img/product2_2.jpg" alt="" class="img-fluid"></a></div>
+                      </div>
+                    </div><a href="detail.html" class="invisible"><img src="/img/product2.jpg" alt="" class="img-fluid"></a>
+                    <div class="text">
+                      <h3>Fur coat</h3>
+                      <p class="price">$143</p>
+                    </div>
+                  </div>
+                  <!-- /.product-->
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="product same-height">
+                    <div class="flip-container">
+                      <div class="flipper">
+                        <div class="front"><a href="detail.html"><img src="/img/product1.jpg" alt="" class="img-fluid"></a></div>
+                        <div class="back"><a href="detail.html"><img src="/img/product1_2.jpg" alt="" class="img-fluid"></a></div>
+                      </div>
+                    </div><a href="detail.html" class="invisible"><img src="/img/product1.jpg" alt="" class="img-fluid"></a>
+                    <div class="text">
+                      <h3>Fur coat</h3>
+                      <p class="price">$143</p>
+                    </div>
+                  </div>
+                  <!-- /.product-->
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="product same-height">
+                    <div class="flip-container">
+                      <div class="flipper">
+                        <div class="front"><a href="detail.html"><img src="/img/product3.jpg" alt="" class="img-fluid"></a></div>
+                        <div class="back"><a href="detail.html"><img src="/img/product3_2.jpg" alt="" class="img-fluid"></a></div>
+                      </div>
+                    </div><a href="detail.html" class="invisible"><img src="/img/product3.jpg" alt="" class="img-fluid"></a>
+                    <div class="text">
+                      <h3>Fur coat</h3>
+                      <p class="price">$143</p>
+                    </div>
+                  </div>
+                  <!-- /.product-->
+                </div>
+              </div>
+              <div class="row same-height-row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="box same-height">
+                    <h3>Products viewed recently</h3>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="product same-height">
+                    <div class="flip-container">
+                      <div class="flipper">
+                        <div class="front"><a href="detail.html"><img src="/img/product2.jpg" alt="" class="img-fluid"></a></div>
+                        <div class="back"><a href="detail.html"><img src="/img/product2_2.jpg" alt="" class="img-fluid"></a></div>
+                      </div>
+                    </div><a href="detail.html" class="invisible"><img src="/img/product2.jpg" alt="" class="img-fluid"></a>
+                    <div class="text">
+                      <h3>Fur coat</h3>
+                      <p class="price">$143</p>
+                    </div>
+                  </div>
+                  <!-- /.product-->
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="product same-height">
+                    <div class="flip-container">
+                      <div class="flipper">
+                        <div class="front"><a href="detail.html"><img src="/img/product1.jpg" alt="" class="img-fluid"></a></div>
+                        <div class="back"><a href="detail.html"><img src="/img/product1_2.jpg" alt="" class="img-fluid"></a></div>
+                      </div>
+                    </div><a href="detail.html" class="invisible"><img src="/img/product1.jpg" alt="" class="img-fluid"></a>
+                    <div class="text">
+                      <h3>Fur coat</h3>
+                      <p class="price">$143</p>
+                    </div>
+                  </div>
+                  <!-- /.product-->
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="product same-height">
+                    <div class="flip-container">
+                      <div class="flipper">
+                        <div class="front"><a href="detail.html"><img src="/img/product3.jpg" alt="" class="img-fluid"></a></div>
+                        <div class="back"><a href="detail.html"><img src="/img/product3_2.jpg" alt="" class="img-fluid"></a></div>
+                      </div>
+                    </div><a href="detail.html" class="invisible"><img src="/img/product3.jpg" alt="" class="img-fluid"></a>
+                    <div class="text">
+                      <h3>Fur coat</h3>
+                      <p class="price">$143</p>
+                    </div>
+                  </div>
+                  <!-- /.product-->
+                </div>
+              </div>
+            </div>
+            <!-- /.col-md-9-->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="/vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.js"></script>
+    <script src="/js/front.js"></script>
+
+</body>
+</html>

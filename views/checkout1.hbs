@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+   <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Google fonts - Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700">
+    <!-- owl carousel-->
+    <link rel="stylesheet" href="/vendor/owl.carousel/assets/owl.carousel.css">
+    <link rel="stylesheet" href="/vendor/owl.carousel/assets/owl.theme.default.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="favicon.png">
+    <script type="text/javascript" href=""></script>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+
+  <!-- Start Header Code  -->
+  <div class="container-fluid">
+    <div class="row" style=" background-color: black;color: white;">
+      <div class="col-sm-2"><a href="/home"><img src="/images/HS.jpg" class="mx-auto d-block" style="height: 50px;"></a></div>
+      <div class="col-sm-7">
+            <div class="input-group" style="margin-top: 7px;">
+              <input type="text" class="form-control" placeholder="Search this blog">
+              <div class="input-group-append">
+                 <button class="btn btn-secondary" type="button">
+                    <i class="fa fa-search"></i>
+                 </button>
+              </div>
+            </div>   
+      </div>
+      <div class="col-sm-3">
+          <div style="float: left;margin-right: 20px;">
+            <div class="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle" style="background-color: black;border: 0;"data-toggle="dropdown">
+                <div>
+                  <a style="cursor: pointer;float: left;"><img src="/images/login-icon.png" height="30px">
+                    Hello,
+                    <div style="margin-left: 15px;">
+                      {{user.name}}
+                    </div>
+                  </a>
+                </div>
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Your Account</a>
+                    <a class="dropdown-item" href="#">Your Order</a>
+                    <a class="dropdown-item" href="/logout">Log Out</a>
+                </div>
+            </div>
+            </div>
+            <div style="float: left;">
+                <a href="/home/cart" style="cursor: pointer;">
+                  <img src="/images/cart.png" height="30px" style="margin-top: 10px;float: left;">
+                      <p style="float: left;margin-top: 12px;color: white;">Cart</p>
+                </a>
+            </div>
+      </div>
+    </div> 
+  </div>
+</div>
+  <!-- End Header Code -->
+ 
+    <div id="all" style="margin-top: 15px;">
+      <div id="content">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <!-- breadcrumb-->
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                  <li aria-current="page" class="breadcrumb-item active">Checkout - Address</li>
+                </ol>
+              </nav>
+            </div>
+            <div id="checkout" class="col-lg-9">
+              <div class="box">
+                <form method="get" action="/home/checkout2">
+                  <h1>Checkout - Address</h1>
+                  <div class="nav flex-column flex-md-row nav-pills text-center">
+                    <a href="checkout1.html" class="nav-link flex-sm-fill text-sm-center active"> 
+                      <i class="fa fa-map-marker"></i>Address
+                    </a>
+                    <a href="#" class="nav-link flex-sm-fill text-sm-center disabled"> 
+                      <i class="fa fa-truck"></i>Delivery Method
+                    </a>
+                    <a href="#" class="nav-link flex-sm-fill text-sm-center disabled"> <i class="fa fa-money"></i>Payment Method
+                    </a>
+                    <a href="#" class="nav-link flex-sm-fill text-sm-center disabled"><i class="fa fa-eye"></i>Order Review
+                    </a>
+                  </div>
+                  <div class="row" >
+                    <div style="margin-left: 15px;">
+                    <input type="radio" name="addressOption" value="SameasBelow" onclick="disable()" checked> Same as Below
+                    <input type="radio" name="addressOption" value="ChangeInAddress" style="margin-left: 15px;" onclick="undisable()"> Change In Address
+                    </div>
+                  </div>
+                  <div class="content py-3">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="firstname">Firstname</label>
+                          <input name="firstname" type="text" class="form-control   address" value="{{user.name}}" required>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="lastname">Lastname</label>
+                          <input name="lastname" type="text" class="form-control address" value="{{user.name}}" required>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.row-->
+                    <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="email">Email</label>
+                        <input name="email" type="text" class="form-control address" value="{{user.email}}"  required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="mobile">Mobile Number</label>
+                        <input name="mobile" type="text" class="form-control address" value="{{user.mobile}}" required>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.row-->
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="home_no">Flat No./House No.</label>
+                        <input name="home_no" type="text" class="form-control address" value="{{address.home_no}}" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="street">Street</label>
+                        <input name="street" type="text" class="form-control address" value="{{address.street}}" required>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.row-->
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 col-lg-3">
+                      <div class="form-group">
+                        <label for="city">City</label>
+                        <input name="city" type="text" class="form-control address" value="{{address.city}}" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                      <div class="form-group">
+                        <label for="pincode">Pin Code</label>
+                        <input name="pincode" type="text" class="form-control address" value="{{address.pincode}}" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                      <div class="form-group">
+                        <label for="state">State</label>
+                        <select name="state" class="form-control address" value="{{address.state}}" required>
+                          <option value="Gujarat">Gujarat</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                      <div class="form-group">
+                        <label for="country">Country</label>
+                        <select name="country" class="form-control address" value="{{address.country}}" required>
+                          <option value="India">India</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!-- /.row-->
+                  </div>
+                  <div class="box-footer d-flex justify-content-between">
+                    {{#if toy}}
+                    <a href="/home" class="btn btn-outline-secondary"><i class="fa fa-chevron-left"></i>Back to Basket
+                    </a>
+                    {{else}}
+                    <a href="/home/cart" class="btn btn-outline-secondary"><i class="fa fa-chevron-left"></i>Back to Basket
+                    </a>  
+                    {{/if}}
+                    <input type="submit" class="btn btn-primary" value="Continue to Delivery Method">
+                    </div>
+                </form>
+              </div>
+              <!-- /.box-->
+            </div>
+            <!-- /.col-lg-9-->
+            <script type="text/javascript">
+              
+             var address = document.getElementsByClassName('address');
+
+                for (var i = 0; i < address.length; i++) {
+                    address[i].disabled = true;
+                }
+
+              function disable(){
+
+                for (var i = 0; i < address.length; i++) {
+                    address[i].disabled = true;
+                }
+              }
+
+              function undisable(){
+                
+                for (var i = 0; i < address.length; i++) {
+                    address[i].disabled = false;
+                }
+              }
+            </script>
+            <div class="col-lg-3">
+              <div id="order-summary" class="card">
+                <div class="card-header">
+                  <h3 class="mt-4 mb-4">Order summary</h3>
+                </div>
+                <div class="card-body">
+                  <p class="text-muted">Shipping and additional costs are calculated based on the values you have entered.</p>
+                  <div class="table-responsive">
+                    <table class="table">
+                      {{#if toy}}
+                      <tbody>
+                        <tr>
+                          <td>Order subtotal</td>
+                          <th>{{toy.toy_price}}</th>
+                        </tr>
+                        <tr>
+                          <td>Shipping and handling</td>
+                          <th>$10.00</th>
+                        </tr>
+                        <tr>
+                          <td>Tax</td>
+                          <th>$0.00</th>
+                        </tr>
+                        <tr class="total">
+                          <td>Total</td>
+                          <th>{{toy.toy_price}}</th>
+                        </tr>
+                      </tbody>
+                      {{else}}
+                        <tr>
+                          <td>Order subtotal</td>
+                          <th class="total"></th>
+                        </tr>
+                        <tr>
+                          <td>Shipping and handling</td>
+                          <th>$10.00</th>
+                        </tr>
+                        <tr>
+                          <td>Tax</td>
+                          <th>$0.00</th>
+                        </tr>
+                        <tr class="total">
+                          <td>Total</td>
+                          <th></th>
+                        </tr>
+                      </tbody>
+                      {{/if}}
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.col-lg-3-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+                        
+        var total=0;
+        {{#each cart}}
+
+            total = total + {{this.toy_id.toy_price}}*{{this.quntity}};
+
+        {{/each}}
+
+        document.getElementsByClassName('total')[0].innerHTML = total;
+        document.getElementsByClassName('total')[1].innerHTML = total;
+
+    </script>
+
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="/vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.js"></script>
+    <script src="/js/front.js"></script>
+</body>
+</html>

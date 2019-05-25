@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+   <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Google fonts - Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700">
+    <!-- owl carousel-->
+    <link rel="stylesheet" href="/vendor/owl.carousel/assets/owl.carousel.css">
+    <link rel="stylesheet" href="/vendor/owl.carousel/assets/owl.theme.default.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="favicon.png">
+    <script type="text/javascript" href=""></script>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <style type="text/css">
+      a{
+        color: black;
+      },
+      .image--cover {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin: 20px;
+      }
+    </style>
+</head>
+<body>
+
+  <!-- Start Header Code  -->
+  <div class="container-fluid">
+    <div class="row" style=" background-color: black;color: white;">
+      <div class="col-sm-2"><a href="/home"><img src="/images/HS.jpg" class="mx-auto d-block" style="height: 50px;"></a></div>
+      <div class="col-sm-7">
+            <div class="input-group" style="margin-top: 7px;">
+              <input type="text" class="form-control" placeholder="Search this blog">
+              <div class="input-group-append">
+                 <button class="btn btn-secondary" type="button">
+                    <i class="fa fa-search"></i>
+                 </button>
+              </div>
+            </div>   
+      </div>
+      <div class="col-sm-3">
+          <div style="float: left;margin-right: 20px;">
+            <div class="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle" style="background-color: black;border: 0;"data-toggle="dropdown">
+                <div>
+                  <a style="cursor: pointer;float: left;"><img src="/images/login-icon.png" height="30px">
+                    Hello,
+                    <div style="margin-left: 15px;">
+                      {{user.name}}
+                    </div>
+                  </a>
+                </div>
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/home/account">Your Account</a>
+                    <a class="dropdown-item" href="/home/myorder">Your Order</a>
+                    <a class="dropdown-item" href="/logout">Log Out</a>
+                </div>
+            </div>
+            </div>
+            <div style="float: left;">
+                <a href="/home/cart" style="cursor: pointer;">
+                  <img src="/images/cart.png" height="30px" style="margin-top: 10px;float: left;">
+                      <p style="float: left;margin-top: 12px;color: white;">Cart</p>
+                </a>
+            </div>
+      </div>
+    </div> 
+  </div>
+</div>
+  <!-- End Header Code -->
+    <div id="all" style="margin-top: 15px;">
+      <div id="content">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <!-- breadcrumb-->
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                  <li aria-current="page" class="breadcrumb-item active">My orders</li>
+                </ol>
+              </nav>
+            </div>
+            <div class="col-lg-3">
+              <!--
+              *** CUSTOMER MENU ***
+              _________________________________________________________
+              -->
+              <div class="card sidebar-menu">
+                <div class="card-header">
+                  <h3 class="h4 card-title">Customer section</h3>
+                </div>
+                <div class="card-body">
+                  <ul class="nav nav-pills flex-column">
+                    <a href="/home/myorder" class="nav-link">
+                      <i class="fa fa-list"></i> My orders
+                    </a>
+                    <a href="/home/account" class="nav-link">
+                      <i class="fa fa-user"></i> My account
+                    </a>
+                    <a href="/logout" class="nav-link">
+                      <i class="fa fa-sign-out"></i> Logout
+                    </a>
+                  </ul>
+                </div>
+              </div>
+              <!-- /.col-lg-3-->
+              <!-- *** CUSTOMER MENU END ***-->
+            </div>
+            <div id="customer-orders" class="col-lg-9">
+              <div class="box">
+                <h1>My orders</h1>
+                <p class="lead">Your orders on one place.</p>
+                <p class="text-muted">If you have any questions, please feel free to <a href="contact.html">contact us</a>, our customer service center is working for you 24/7.</p>
+                <hr>
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Order</th>
+                        <th>Date</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th># 1735</th>
+                        <td>22/06/2013</td>
+                        <td>$ 150.00</td>
+                        <td><span class="badge badge-info">Being prepared</span></td>
+                        <td><a href="customer-order.html" class="btn btn-primary btn-sm">View</a></td>
+                      </tr>
+                        <td><span class="badge badge-info">Being prepared</span></td>
+                        <td><span class="badge badge-success">Received</span></td>
+                        <td><span class="badge badge-danger">Cancelled</span></td>
+                        <td><span class="badge badge-warning">On hold</span></td>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="/vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.js"></script>
+    <script src="/js/front.js"></script>
+</body>
+</html>

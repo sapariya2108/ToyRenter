@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Category</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Google fonts - Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700">
+    <!-- owl carousel-->
+    <link rel="stylesheet" href="/vendor/owl.carousel/assets/owl.carousel.css">
+    <link rel="stylesheet" href="/vendor/owl.carousel/assets/owl.theme.default.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="favicon.png">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+
+  <!-- Start Header Code  -->
+  <div class="container-fluid">
+    <div class="row" style=" background-color: black;color: white;">
+      <div class="col-sm-2"><a href="/home"><img src="/images/HS.jpg" class="mx-auto d-block" style="height: 50px;"></a></div>
+      <div class="col-sm-7">
+            <div class="input-group" style="margin-top: 7px;">
+              <input type="text" class="form-control" placeholder="Search this blog">
+              <div class="input-group-append">
+                 <button class="btn btn-secondary" type="button">
+                    <i class="fa fa-search"></i>
+                 </button>
+              </div>
+            </div>   
+      </div>
+      <div class="col-sm-3">
+        {{#if user.name}}
+          <div style="float: left;margin-right: 20px;">
+            <div class="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle" style="background-color: black;border: 0;"data-toggle="dropdown">
+                <div>
+                  <a style="cursor: pointer;float: left;"><img src="/images/login-icon.png" height="30px">
+                    Hello,
+                    <div style="margin-left: 15px;">
+                      {{user.name}}
+                    </div>
+                  </a>
+                </div>
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Your Account</a>
+                    <a class="dropdown-item" href="#">Your Order</a>
+                    <a class="dropdown-item" href="/logout">Log Out</a>
+                </div>
+            </div>
+            </div>
+            <div style="float: left;">
+                <a href="/home/cart" style="cursor: pointer;">
+                  <img src="/images/cart.png" height="30px" style="margin-top: 10px;float: left;">
+                      <p style="float: left;margin-top: 12px;color: white;">Cart</p>
+                </a>
+            </div>
+        {{else}}
+          <div style="float: left;margin-right: 20px;">
+            <a id="signIn_button" style="cursor: pointer;">
+              <img src="/images/login-icon.png" height="30px" style="margin-top: 10px;float: left;">
+                <p style="float: left;margin-top: 12px;">Sign In</p>
+            </a>
+            <div style="float: left;">
+              <a id="cart" style="cursor: pointer;">
+                <img src="/images/cart.png" height="30px" style="margin-top: 10px;float: left;">
+                    <p style="float: left;margin-top: 12px;color: white;">Cart</p>
+              </a>
+            </div>
+          </div>
+        {{/if}}
+        <div id="signInModal" class="modal">
+           <!-- Modal content -->
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <span class="close" style="align-items: right;"></span>
+                <div class="card card-signin my-5">
+                  <div class="card-body">
+                    <h5 class="card-title text-center" style="color: black;">Sign In</h5>
+                    <form class="form-signin">
+                      <div class="form-label-group">
+                        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                        <label for="inputEmail">Email address</label>
+                      </div>
+
+                      <div class="form-label-group">
+                        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                        <label for="inputPassword">Password</label>
+                      </div>
+
+                      <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+                      <hr class="my-4">
+                      <a id="google" href="" class="btn btn-lg btn-google btn-block text-uppercase" type="submit" style="        cursor: pointer;"><i class="fab fa-google mr-2"></i> Sign in with Google</a>
+                      <a id="facebook" href="" class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit" style="cursor: pointer;"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</a>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+</div>
+
+  <script type="text/javascript">
+    
+    var google = "/auth/google/category?category="+"{{title}}";
+
+    var facebook = "auth/facebook/category?category="+"{{title}}";
+
+    document.getElementById('google').href = google;
+
+    document.getElementById('facebook').href = facebook;
+  </script>
+
+    <script>
+// Get the modal
+var modal = document.getElementById('signInModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("signIn_button");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+var cart = document.getElementById("cart");
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+cart.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+  <!-- End Header Code -->
+    <div id="all">
+      <div id="content">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <!-- breadcrumb-->
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                  <li aria-current="page" class="breadcrumb-item active">{{title}}</li>
+                </ol>
+              </nav>
+            </div>
+            <div class="col-lg-3">
+              <!--
+              *** MENUS AND FILTERS ***
+              _________________________________________________________
+              -->
+              <div class="card sidebar-menu mb-4">
+                <div class="card-header">
+                  <h3 class="h4 card-title">Categories<a href="#" class="btn btn-sm btn-danger pull-right"><i class="fa fa-times-circle"></i> Clear</a></h3>
+                </div>
+                <div class="card-body">
+                  <form action="/home/toy" method="get">
+                    <div class="form-group">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="categories"> Animals 
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="categories"> Art and Craft 
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="categories"> Construction 
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="categories"> Dolls
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="categories"> Educational
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="categories"> Mechanical
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="categories"> Tedi bear
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="categories"> Vehical
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="categories"> Water Toy
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="categories"> Roborts 
+                        </label>
+                      </div>
+                    </div>
+                    <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>
+                  </form>
+                </div>
+              </div>
+              <div class="card sidebar-menu mb-4">
+                <div class="card-header">
+                  <h3 class="h4 card-title">Material<a href="#" class="btn btn-sm btn-danger pull-right"><i class="fa fa-times-circle"></i> Clear</a></h3>
+                </div>
+                <div class="card-body">
+                  <form>
+                    <div class="form-group">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> Plastic 
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> Wood   
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> Plush 
+                        </label>
+                      </div>
+                    </div>
+                    <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>
+                  </form>
+                </div>
+              </div>
+              <div class="card sidebar-menu mb-4">
+                <div class="card-header">
+                  <h3 class="h4 card-title">Colours <a href="#" class="btn btn-sm btn-danger pull-right"><i class="fa fa-times-circle"></i> Clear</a></h3>
+                </div>
+                <div class="card-body">
+                  <form>
+                    <div class="form-group">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"><span class="colour white"></span> White 
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"><span class="colour blue"></span> Blue 
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"><span class="colour green"></span>  Green
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"><span class="colour yellow"></span>  Yellow
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"><span class="colour red"></span>  Red 
+                        </label>
+                      </div>
+                    </div>
+                    <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>
+                  </form>
+                </div>
+              </div>
+
+              <div class="card sidebar-menu mb-4">
+                <div class="card-header">
+                  <h3 class="h4 card-title">Brands <a href="#" class="btn btn-sm btn-danger pull-right"><i class="fa fa-times-circle"></i> Clear</a></h3>
+                </div>
+                <div class="card-body">
+                  <form>
+                    <div class="form-group">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> 
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> 
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> 
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> 
+                        </label>
+                      </div>
+                    </div>
+                    <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>
+                  </form>
+                </div>
+              </div>
+              <!-- *** MENUS AND FILTERS END ***-->
+              <div class="banner"><a href="#"><img src="/img/banner.jpg" alt="sales 2014" class="img-fluid"></a></div>
+            </div>
+            <div class="col-lg-9">
+              <div class="row products">
+                {{#each toy}}
+                <div class="col-lg-4 col-md-6">
+                  <div class="product">
+                    <div class="flip-container">
+                      <div class="flipper">
+                        <div class="front"><a href="detail.html"><img src={{#with this.toy_image}}{{this.[0]}}{{/with}} alt="" class="img-fluid"></a></div>
+                        <div class="back"><a href="detail.html"><img src={{#with this.toy_image}}{{this.[1]}}{{/with}} alt="" class="img-fluid"></a></div>
+                      </div>
+                    </div><a href="detail.html" class="invisible"><img src={{#with this.toy_image}}{{this.[0]}}{{/with}} alt="" class="img-fluid"></a>
+                    <div class="text">
+                      <h3><a href="detail.html">{{this.toy_title}}</a></h3>
+                      <p class="price"> 
+                        <del></del>{{this.toy_price}}
+                      </p>
+                      <p class="buttons">
+                        <a id={{this._id}} href="" class="btn btn-outline-secondary">View detail</a>
+                        {{#if this.user.name}}
+                        <a class="btn btn-primary addtocart">
+                        <i class="fa fa-shopping-cart"></i>Add to cart
+                        </a>
+                        <script type="text/javascript">
+                           var url = "http://localhost:3000/home/product?id="+"{{this._id}}";
+
+                            document.getElementById('{{this._id}}').href = url;
+
+                            var cartUrl ="http://localhost:3000/home/product/addtocart?id="+"{{this._id}}"; 
+                            var cart = document.getElementsByClassName('addtocart');
+
+                            cart[cart.length-1].href = cartUrl;
+                        </script>
+                        {{else}}
+                        <a class="btn btn-primary cartbutton" style="cursor: pointer;" onclick="showModal()">
+                        <i class="fa fa-shopping-cart"></i>Add to cart
+                        </a>
+                        <script type="text/javascript">
+                           var url = "http://localhost:3000/home/product?id="+"{{this._id}}";
+
+                            document.getElementById('{{this._id}}').href = url;
+
+                            var modal = document.getElementById('signInModal');
+
+                            function showModal(){
+                              cart.onclick = function() {
+                               modal.style.display = "block";
+                            }
+                          }
+
+                            // When the user clicks any where outside of the modal, close it
+                            window.onclick = function(event) {
+                            if (event.target == modal) {
+                                  modal.style.display = "none";
+                            }
+                          }
+
+                        </script>
+                        {{/if}}
+                      </p>
+                    </div>
+                    <!-- /.text-->
+                  </div>
+                  <!-- /.product            -->
+                </div>
+                {{/each}}
+            </div>
+            <!-- /.col-lg-9-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="/vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.js"></script>
+    <script src="/js/front.js"></script>
+</body>
+</html>
