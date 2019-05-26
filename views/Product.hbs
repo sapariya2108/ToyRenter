@@ -172,7 +172,7 @@ window.onclick = function(event) {
                   <li class="breadcrumb-item"><a href="/home">Home</a></li>
                   <li class="breadcrumb-item"><a id="Categories" href="">{{#each toy}}{{this.toy_categories}}{{/each}}</a> / </li>
                   <script type="text/javascript">
-                           var url = "http://localhost:3000/home/"+"{{#each toy}}{{this.toy_categories}}{{/each}}";
+                           var url = "/home/"+"{{#each toy}}{{this.toy_categories}}{{/each}}";
 
                             document.getElementById('Categories').href = url;
                      </script>
@@ -371,11 +371,11 @@ window.onclick = function(event) {
                     </p>
                   </div>
                   <script type="text/javascript">
-                      var carturl = "http://localhost:3000/home/product/addtocart?id="+"{{#each toy}}{{this._id}}{{/each}}";
+                      var carturl = "/home/product/addtocart?id="+"{{#each toy}}{{this._id}}{{/each}}";
 
                       document.getElementById('addtocart').href = carturl;
 
-                      var buynowurl = "http://localhost:3000/home/checkout1?id="+"{{#each toy}}{{this._id}}{{/each}}";
+                      var buynowurl = "/home/checkout1?id="+"{{#each toy}}{{this._id}}{{/each}}";
 
                       document.getElementById('buynow').href = buynowurl;
                   </script>

@@ -18,7 +18,7 @@ passport.deserializeUser((id,done)=>{
 passport.use(
 	new GoogleStrategy({
 
-		callbackURL: "http://localhost:3000/auth/google/redirect",
+		callbackURL: "/auth/google/redirect",
 		clientID: "828867240540-c1h6iclul6djtjpn65kd63981n2638e1.apps.googleusercontent.com",
 		clientSecret: "aeGd4M-OFgiyCrbZ0nR1Itcu"
 	
@@ -53,7 +53,7 @@ passport.use(
 passport.use(
 	new FacebookStrategy({
 
-		callbackURL: "http://localhost:3000/auth/facebook/callback",
+		callbackURL: "/auth/facebook/callback",
 		clientID: "1246674498841217",
 		clientSecret: "f04fa8f406bd0283d513c1fd5e9549b4",
 		profileFields: ['id','displayName' ,'emails','picture.type(large)']

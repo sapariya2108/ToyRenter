@@ -369,11 +369,11 @@ window.onclick = function(event) {
                         <i class="fa fa-shopping-cart"></i>Add to cart
                         </a>
                         <script type="text/javascript">
-                           var url = "http://localhost:3000/home/product?id="+"{{this._id}}";
+                           var url = "/home/product?id="+"{{this._id}}";
 
                             document.getElementById('{{this._id}}').href = url;
 
-                            var cartUrl ="http://localhost:3000/home/product/addtocart?id="+"{{this._id}}"; 
+                            var cartUrl ="/home/product/addtocart?id="+"{{this._id}}"; 
                             var cart = document.getElementsByClassName('addtocart');
 
                             cart[cart.length-1].href = cartUrl;
@@ -383,7 +383,7 @@ window.onclick = function(event) {
                         <i class="fa fa-shopping-cart"></i>Add to cart
                         </a>
                         <script type="text/javascript">
-                           var url = "http://localhost:3000/home/product?id="+"{{this._id}}";
+                           var url = "/home/product?id="+"{{this._id}}";
 
                             document.getElementById('{{this._id}}').href = url;
 
