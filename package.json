@@ -1,6 +1,10 @@
 {
   "name": "toy-renter",
   "version": "1.0.0",
+  "engines": {
+    "node": "10.16.3",
+    "npm":"6.9.0"
+  },
   "description": "",
   "main": "server.js",
   "scripts": {
