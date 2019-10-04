@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const http = require('http');
 
 
-const MONGODB = 'mongodb+srv://Harsh:tys355!@#@toyrenter-hhprd.mongodb.net/admin?retryWrites=true&w=majority';
+const MONGODB = 'mongodb+srv://Harsh:<password>@toyrenter-hhprd.mongodb.net/admin?retryWrites=true&w=majority/test;
 const PORT = process.env.PORT || 3000;
 	
 mongoose.connect(MONGODB);
