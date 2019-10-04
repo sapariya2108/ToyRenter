@@ -1,14 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Address  = require('./AddressModel');
-
-mongoose.connect('mongodb://localhost:27017/test');
-
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-	console.log("Connected Succesfully");
-});
+const db = require('../server');
 
 var Schema = mongoose.Schema;
 

@@ -3,14 +3,7 @@ const mongoose = require('mongoose');
 const Toy = require('./ToyModel');
 const User = require('./UserModel');
 const {ObjectId} = require('mongodb');
-
-mongoose.connect('mongodb://localhost:27017/EmployeeDB',{useNewUrlParser:true});
-
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-	console.log("Awsome Connected Succesfully");
-});
+const db = require('../server');
 
 const Schema = mongoose.Schema;
 

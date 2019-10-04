@@ -2,14 +2,8 @@ var express = require('express');
 var mongoose = require('mongoose');
 var toy = require('../models/ToyModel');
 const {ObjectId} = require('mongodb');
+const db = require('../server');
 
-mongoose.connect('mongodb://localhost:27017/test');
-
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-	console.log("Connected Succesfully");
-});
 
 module.exports = function(app){
 
@@ -20,7 +14,7 @@ module.exports = function(app){
 			if(err) console.log("Error",err);
 			
 			var productUrl = {
-				url:"https://localhost:3000/home/product?id="+toy[0]._id
+				url:"/home/product?id="+toy[0]._id
 			}
 
 

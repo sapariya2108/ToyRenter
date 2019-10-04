@@ -31,7 +31,7 @@ module.exports = function(app){
 		}
 		else{
 
-			res.redirect('/home');
+			res.redirect('/');
 		
 		}
 	});
@@ -43,13 +43,13 @@ module.exports = function(app){
 
 	app.get('/auth/facebook/callback',passport.authenticate('facebook',
 	{ 
-		successRedirect:'/home',
+		successRedirect:'/',
 		failureRedirect:'/auth/facebook'
 	}));
 
 	app.get('/logout',function(req,res){
 		req.logout();
-		res.redirect('/home');
+		res.redirect('/');
 	})	
 
 	app.get('/auth/google/product',function(req,res,next){

@@ -4,15 +4,7 @@ const Cart = require('../models/CartModel');
 const Toy = require('../models/ToyModel');
 const User = require('../models/UserModel');
 const {ObjectId} = require('mongodb');
-
-mongoose.connect('mongodb://localhost:27017/test');
-
-
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-	console.log("Really!! Connected Succesfully");
-});
+const db = require('../server');
 
 
 module.exports = function(app){
