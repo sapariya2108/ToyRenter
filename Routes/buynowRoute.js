@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Order = require('../models/OrderModel');
-const OrderDetails = require('../models/orderDetailsModel');
+const OrderDetails = require('../models/OrderDetailsModel');
 const {ObjectId} = require('mongodb');
 const Address = require('../models/AddressModel');
 const User = require('../models/UserModel')	;

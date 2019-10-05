@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const order = require('../models/OrderModel');
-const orderDetails = require('../models/orderDetailsModel');
+const orderDetails = require('../models/OrderDetailsModel');
 
 const app = new express();
 
@@ -14,6 +14,5 @@ module.exports = function(app){
 		res.render('MyOrder',{user:req.user});
 
 	})
-
 
 }
