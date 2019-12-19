@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Google fonts - Roboto -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700">
     <!-- owl carousel-->
@@ -24,18 +26,55 @@
 
   <!-- Start Header Code  -->
   <div class="container-fluid">
-    <div class="row" style=" background-color: black;color: white;">
+    <div class="row" style=" background-color: black;color: white;height: 50px">
       <div class="col-sm-2"><a href="/"><img src="/images/HS.jpg" class="mx-auto d-block" style="height: 50px;"></a></div>
       <div class="col-sm-7">
+        <form id="searchform">
             <div class="input-group" style="margin-top: 7px;">
-              <input type="text" class="form-control" placeholder="Search this blog">
+              <input type="text" id="search" name="search" class="form-control" placeholder="Search this blog">
               <div class="input-group-append">
-                 <button class="btn btn-secondary" type="button">
+                 <button id="search_btn" class="btn btn-secondary" type="submit">
                     <i class="fa fa-search"></i>
                  </button>
               </div>
-            </div>   
+            </div>
+        </form>
+       <ul class="list-group" style="position:relative; z-index: 2" id="search_item">
+       </ul>   
       </div>
+      <script type="text/javascript">
+
+        $(document).ready(function(){
+            $("#search").keyup(function(){
+              var data = $(this).val();
+              $.ajax({
+                url:"/search",
+                method:"GET",
+                data:{search:data},
+                success:function(data){
+                $("#search_item").html(data);
+              }
+              })
+            });
+
+            $("#search").focusout(function(){
+
+                $(this).delay(1000).queue(function(){
+
+                      $("#search_result").remove();
+
+                });
+            });
+            $("#search").keyup(function(e){
+              if(e.key == "Escape"){
+                $("#search_result").remove();
+                $("#search").val('');
+              }
+            })
+        });
+
+      </script>
+
       <div class="col-sm-3">
           <div style="float: left;margin-right: 20px;">
             <div class="dropdown">

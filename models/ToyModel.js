@@ -7,15 +7,18 @@ var toySchema = new Schema({
 
 	toy_name: {
 		type:String,
-		required:true
+		required:true,
+		text:true
 	},
 	toy_title: {
 		type:String,
-		required:true
+		required:true,
+		text:true
 	},
 	toy_descripation:{
 		type:[String],
-		required:true
+		required:true,
+		text:true
 	},
 	toy_categories:{
 		type:String,

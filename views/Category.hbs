@@ -7,6 +7,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
+    <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome CSS-->
@@ -31,18 +33,137 @@
 
   <!-- Start Header Code  -->
   <div class="container-fluid">
-    <div class="row" style=" background-color: black;color: white;">
+    <div class="row" style=" background-color: black;color: white;height: 50px">
       <div class="col-sm-2"><a href="/"><img src="/images/HS.jpg" class="mx-auto d-block" style="height: 50px;"></a></div>
       <div class="col-sm-7">
+        <form id="searchform">
             <div class="input-group" style="margin-top: 7px;">
-              <input type="text" class="form-control" placeholder="Search this blog">
+              <input type="text" id="search" name="search" class="form-control" placeholder="Search this blog">
               <div class="input-group-append">
-                 <button class="btn btn-secondary" type="button">
+                 <button id="search_btn" class="btn btn-secondary" type="submit">
                     <i class="fa fa-search"></i>
                  </button>
               </div>
-            </div>   
+            </div>
+        </form>
+       <ul class="list-group" style="position:relative; z-index: 2" id="search_item">
+       </ul>   
       </div>
+      <script type="text/javascript">
+
+        $(document).ready(function(){
+            $("#search").keyup(function(){
+              var data = $(this).val();
+              $.ajax({
+                url:"/search",
+                method:"GET",
+                data:{search:data},
+                success:function(data){
+                $("#search_item").html(data);
+              }
+              })
+            });
+
+            $("#search").focusout(function(){
+
+                $(this).delay(1000).queue(function(){
+
+                      $("#search_result").remove();
+
+                });
+            });
+            $("#search").keyup(function(e){
+              if(e.key == "Escape"){
+                $("#search_result").remove();
+                $("#search").val('');
+              }
+            })
+        });
+
+         window.indexedDB = window.indexedDB || window.mozIndexedDB || 
+         window.webkitIndexedDB || window.msIndexedDB;
+         
+
+        if (!window.indexedDB) {
+            window.alert("Your browser doesn't support a stable version of IndexedDB.")
+         }
+
+         var db;
+         indexedDB.deleteDatabase("ToyDatabase");
+         var request = window.indexedDB.open("ToyDatabase", 1);
+
+        request.onupgradeneeded = function(event) {
+            db = event.target.result;
+  
+            console.log("success: "+ db);  
+
+            var objectStore = db.createObjectStore("toy",{keyPath:"id"});   
+
+          objectStore.createIndex("toy_name","toy_name",{unique:false});
+          objectStore.createIndex("toy_categories","toy_categories",{unique:false});
+          objectStore.createIndex("toy_material","toy_material",{unique:false});
+          objectStore.createIndex("toy_color","toy_color",{unique:false});
+        }
+
+        request.onsuccess = function(event){
+
+          db = event.target.result;
+          
+          console.log("success: "+ db);
+
+          addAll();
+        }
+
+         request.onerror = function(event) {
+            console.log("error: ");
+         };
+
+         function addAll(){
+
+          var transaction = db.transaction(["toy"],"readwrite").objectStore("toy");
+
+          var request ;
+          {{#each toy}}
+            var des = "{{this.toy_descripation}}";
+            var image = ["{{this.toy_image}}"];
+            var toy_id = "{{this._id}}";
+            var name = "{{this.toy_name}}";
+            var title = "{{this.toy_title}}";
+            var categories = "{{this.toy_categories}}";
+            var from = "{{this.age_from}}";
+            var to = "{{this.age_to}}";
+            var material = "{{this.toy_material}}";
+            var price = "{{this.toy_price}}";
+            var brand = "{{this.toy_brand}}";
+            var color = ["{{this.toy_color}}"]
+
+
+            var data = [{id:toy_id,toy_descripation:des,toy_image:image,toy_name:name,toy_title:title,toy_categories:categories,toy_from:from,toy_to:to,toy_material:material,toy_price:price,toy_brand:brand,toy_color:color}];
+
+            request = transaction.add(data[0]);
+          {{/each}}
+
+            console.log("Success Fully Inserted");
+          
+            var objectStore = db.transaction(["toy"]).objectStore("toy");
+
+            var index = objectStore.index("toy_name");
+             index.openCursor().onsuccess = function(event){
+
+              var cursor = event.target.result;
+               
+               if (cursor) {
+                  console.log(cursor)
+                  cursor.continue();
+               } else {
+                  alert("No more entries!");
+               }
+
+        }
+      }
+
+
+      </script>
       <div class="col-sm-3">
         {{#if user.name}}
           <div style="float: left;margin-right: 20px;">
@@ -189,63 +310,92 @@ window.onclick = function(event) {
                   <h3 class="h4 card-title">Categories<a href="#" class="btn btn-sm btn-danger pull-right"><i class="fa fa-times-circle"></i> Clear</a></h3>
                 </div>
                 <div class="card-body">
-                  <form action="/home/toy" method="get">
+                  <form>
                     <div class="form-group">
                       <div class="checkbox">
                         <label>
-                          <input type="checkbox" name="categories"> Animals 
+                          <input type="checkbox" value="animal" name="categories"> Animals 
                         </label>
                       </div>
                       <div class="checkbox">
                         <label>
-                          <input type="checkbox" name="categories"> Art and Craft 
+                          <input type="checkbox" value="artandcraft" name="categories"> Art and Craft 
                         </label>
                       </div>
                       <div class="checkbox">
                         <label>
-                          <input type="checkbox" name="categories"> Construction 
+                          <input type="checkbox" value="construction" name="categories"> Construction 
                         </label>
                       </div>
                       <div class="checkbox">
                         <label>
-                          <input type="checkbox" name="categories"> Dolls
+                          <input type="checkbox" value="doll" name="categories"> Dolls
                         </label>
                       </div>
                       <div class="checkbox">
                         <label>
-                          <input type="checkbox" name="categories"> Educational
+                          <input type="checkbox" value="educational" name="categories"> Educational
                         </label>
                       </div>
                       <div class="checkbox">
                         <label>
-                          <input type="checkbox" name="categories"> Mechanical
+                          <input type="checkbox" value="mechanical" name="categories"> Mechanical
                         </label>
                       </div>
                       <div class="checkbox">
                         <label>
-                          <input type="checkbox" name="categories"> Tedi bear
+                          <input type="checkbox" value="tedibear" name="categories"> Tedi bear
                         </label>
                       </div>
                       <div class="checkbox">
                         <label>
-                          <input type="checkbox" name="categories"> Vehical
+                          <input type="checkbox" value="vehical" name="categories"> Vehical
                         </label>
                       </div>
                       <div class="checkbox">
                         <label>
-                          <input type="checkbox" name="categories"> Water Toy
+                          <input type="checkbox" value="watertoy" name="categories"> Water Toy
                         </label>
                       </div>
                       <div class="checkbox">
                         <label>
-                          <input type="checkbox" name="categories"> Roborts 
+                          <input type="checkbox" value="robots" name="categories"> Roborts 
                         </label>
                       </div>
                     </div>
-                    <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>
+                    <button class="btn btn-default btn-sm btn-primary" id="categories_botton" type="button"><i class="fa fa-pencil"></i> Apply</button>
                   </form>
                 </div>
               </div>
+              <script type="text/javascript">
+                
+                  $(document).ready(function(){
+
+                      $("#categories_botton").click(function(){
+
+                          var filter = [];
+                          $.each($("input[name='categories']:checked"),function(){
+
+                            filter.push($(this).val());
+                          })
+
+                          alert(filter[0]);
+
+                        console.log("FIlter: "+db);
+                        var objectStore = db.transaction(["toy"]).objectStore("toy");
+
+                         var index = objectStore.index("toy_categories");
+
+                         var data = index.getAll(filter[0]);
+
+                        data.onsuccess = function(event){
+                               console.log(data.result);
+                        }
+
+                          })
+                    });
+
+              </script>
               <div class="card sidebar-menu mb-4">
                 <div class="card-header">
                   <h3 class="h4 card-title">Material<a href="#" class="btn btn-sm btn-danger pull-right"><i class="fa fa-times-circle"></i> Clear</a></h3>

@@ -27,14 +27,11 @@ module.exports = function(app){
 
 		toy.find({toy_categories:"animal"},function(err,toy){
 
-				console.log("Animal Entry");
-				console.log(req.user);
 				toy.user = req.user;
 				for(var i=0;i<toy.length;i++){
 
 					toy[i].user = req.user;
 				}
-				console.log(toy);
 				res.render('Category',{user:req.user,title:"Animal",toy:toy,cartUser:req.user});
 	
 		});

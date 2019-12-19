@@ -45,5 +45,7 @@ myorderRoute(app);
 var buynowRoute = require('./Routes/buynowRoute');
 buynowRoute(app);
 
+var search = require('./Routes/search');
+search(app);
 
 module.exports = app;
