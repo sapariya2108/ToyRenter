@@ -23,9 +23,12 @@ module.exports = function(app){
 		});
 	});
 
-	app.get('/home/animal',function(req,res){
+	app.get('/home',function(req,res){
 
-		toy.find({toy_categories:"animal"},function(err,toy){
+
+		let category = req.query.category;
+
+		toy.find({toy_categories:category},function(err,toy){
 
 				toy.user = req.user;
 				for(var i=0;i<toy.length;i++){

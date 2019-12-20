@@ -11,7 +11,7 @@ module.exports = function(app){
 		var animal_toy = await toy.find({toy_categories:"animal"});
 		//console.log(animal_toy);
 
-		var artandcraft_toy = await toy.find({toy_categories:"art and craft"});
+		var artandcraft_toy = await toy.find({toy_categories:"artandcraft"});
 		//console.log(artandcraft_toy);
 
 		var construction_toy = await toy.find({toy_categories:"construction"});

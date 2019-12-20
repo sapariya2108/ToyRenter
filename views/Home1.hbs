@@ -38,7 +38,7 @@
 		<div class="row" style=" background-color: black;color: white;height: 50px">
 			<div class="col-sm-2"><a href="/"><img src="/images/HS.jpg" class="mx-auto d-block" style="height: 50px;"></a></div>
 			<div class="col-sm-7">
-        <form id="searchform">
+        <form id="searchform" action="/search_enter">
             <div class="input-group" style="margin-top: 7px;">
               <input type="text" id="search" name="search" class="form-control" placeholder="Search this blog">
               <div class="input-group-append">
@@ -54,16 +54,30 @@
       <script type="text/javascript">
 
         $(document).ready(function(){
-            $("#search").keyup(function(){
+            $("#search").keydown(function(event){
+              var keycode = (event.keyCode ? event.keyCode : event.which);
+              console.log(keycode);
+                
+              if($(this).val()==""){
+                $("#search_result").remove();
+              }
+              else if(keycode == '13'){
+                    $("search_btn").click();
+              }
+              else if(keycode == '27'){
+                    $("#search_result").remove();
+              }
+              else{
               var data = $(this).val();
               $.ajax({
                 url:"/search",
                 method:"GET",
-                data:{search:data},
+                data:{search:data,flag:true},
                 success:function(data){
                 $("#search_item").html(data);
               }
               })
+             }
             });
 
             $("#search").focusout(function(){
@@ -74,11 +88,10 @@
 
                 });
             });
-            $("#search").keyup(function(e){
-              if(e.key == "Escape"){
-                $("#search_result").remove();
-                $("#search").val('');
-              }
+            $("#search_btn").click(function(){
+                var data = $("#search").val();
+                $("#searchform").submit();
+              // $.get("/search",{search:data,flag:false})
             })
         });
 
@@ -225,7 +238,7 @@ window.onclick = function(event) {
 
 <div class="container" style="margin-top:15px;margin-bottom: 15px;" >
   <div class="row" id="style-3" style="overflow-x: scroll;white-space: nowrap;display: block;margin-left: 3%;margin-right: 2%;">
-    <p style="font-size: 24px;font-weight: bold;"> Animal Toy <a href="/home/animal" style="font-size: 16px;">See all items</a></p>
+    <p style="font-size: 24px;font-weight: bold;"> Animal Toy <a href="/home?category=animal" style="font-size: 16px;">See all items</a></p>
       {{#each animal_toy}}
     <a id="{{this._id}}" href="">
       <script type="text/javascript">
@@ -264,7 +277,7 @@ window.onclick = function(event) {
       {{/each}}
   </div>
   <div class="row" style="overflow-x: auto;white-space: nowrap;display: block;margin-left: 3%;margin-right: 2%;">
-    <a><p style="font-size: 24px;font-weight: bold;"> Art And Craft Toy <a href="/home/Art and Craft" style="font-size: 16px;">See all items</a> </p></a>
+    <a><p style="font-size: 24px;font-weight: bold;"> Art And Craft Toy <a href="/home?category=artandcraft" style="font-size: 16px;">See all items</a> </p></a>
       {{#each artandcraft_toy}}
     <a id="{{this._id}}" href="">
       <script type="text/javascript">
@@ -303,7 +316,7 @@ window.onclick = function(event) {
       {{/each}}
   </div>
   <div class="row" style="overflow-x: auto;white-space: nowrap;display: block;margin-left: 3%;margin-right: 2%;">
-    <a><p style="font-size: 24px;font-weight: bold;"> Construction Toy<a href="/home/Construction" style="font-size: 16px;">See all items</a> </p></a>
+    <a><p style="font-size: 24px;font-weight: bold;"> Construction Toy<a href="/home?category=construction" style="font-size: 16px;">See all items</a> </p></a>
       {{#each construction_toy}}
     <a id="{{this._id}}" href="">
       <script type="text/javascript">
