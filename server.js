@@ -3,7 +3,7 @@ const http = require('http');
 const toy = require('./models/ToyModel');
 
 
-const MONGODB ='mongodb://localhost:27017/test' || 'mongodb://Harsh:harsh@toyrenter-shard-00-00-hhprd.mongodb.net:27017,toyrenter-shard-00-01-hhprd.mongodb.net:27017,toyrenter-shard-00-02-hhprd.mongodb.net:27017/test?ssl=true&replicaSet=toyrenter-shard-0&authSource=admin&retryWrites=true&w=majority';
+const MONGODB = 'mongodb://Harsh:harsh@toyrenter-shard-00-00-hhprd.mongodb.net:27017,toyrenter-shard-00-01-hhprd.mongodb.net:27017,toyrenter-shard-00-02-hhprd.mongodb.net:27017/test?ssl=true&replicaSet=toyrenter-shard-0&authSource=admin&retryWrites=true&w=majority';
 const PORT = process.env.PORT || 3000;
 	
 mongoose.connect(MONGODB);
